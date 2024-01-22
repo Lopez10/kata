@@ -40,4 +40,34 @@ describe('Email value object', () => {
         // THEN
         expect(emailVo).toThrow('Email is invalid')
     });
+
+    it(`
+        GIVEN two emails with same value
+        WHEN emails are being compared
+        THEN it should return true
+    `, () => {
+        // GIVEN
+        const email = 'test@test.com'
+        const email2 = 'test@test.com'
+        // WHEN
+        const emailVo = new Email(email);
+        const emailVo2 = new Email(email2);
+        // THEN
+        expect(emailVo.matches(emailVo2)).toBe(true)
+    });
+
+    it(`
+        GIVEN two emails with different value
+        WHEN emails are being compared
+        THEN it should return false
+    `, () => {
+        // GIVEN
+        const email = 'test@test.com'
+        const email2 = 'test@fake.com'
+        // WHEN
+        const emailVo = new Email(email);
+        const emailVo2 = new Email(email2);
+        // THEN
+        expect(emailVo.matches(emailVo2)).toBe(false)
+    });
 });
