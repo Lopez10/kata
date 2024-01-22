@@ -66,4 +66,34 @@ describe('Password value object', () => {
         // THEN
         expect(passwordVo).toThrow('Password must have at least 8 characters')
     });
+
+    it(`
+        GIVEN two passwords with same value
+        WHEN passwords are being compared
+        THEN it should return true
+    `, () => {
+        // GIVEN
+        const password = 'password1'
+        const password2 = 'password1'
+        // WHEN
+        const passwordVo = new Password(password);
+        const passwordVo2 = new Password(password2);
+        // THEN
+        expect(passwordVo.matches(passwordVo2)).toBe(true)
+    });
+
+    it(`
+        GIVEN two passwords with different value
+        WHEN passwords are being compared
+        THEN it should return false
+    `, () => {
+        // GIVEN
+        const password = 'password1'
+        const password2 = 'password2'
+        // WHEN
+        const passwordVo = new Password(password);
+        const passwordVo2 = new Password(password2);
+        // THEN
+        expect(passwordVo.matches(passwordVo2)).toBe(false)
+    });
 });
