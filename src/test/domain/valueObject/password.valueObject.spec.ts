@@ -8,8 +8,10 @@ describe('Password value object', () => {
     `, () => {
         // GIVEN
         const password = 'password1'
+
         // WHEN
         const passwordVo = new Password(password);
+
         // THEN
         expect(passwordVo).toBeDefined();
         expect(passwordVo.props.value).toBe(password);
@@ -22,8 +24,10 @@ describe('Password value object', () => {
     `, () => {
         // GIVEN
         const password = ''
+
         // WHEN
         const passwordVo = () => new Password(password);
+
         // THEN
         expect(passwordVo).toThrow('Password is required')
     });
@@ -35,8 +39,10 @@ describe('Password value object', () => {
     `, () => {
         // GIVEN
         const password = 'password'
+
         // WHEN
         const passwordVo = () => new Password(password);
+
         // THEN
         expect(passwordVo).toThrow('Password must have at least one number')
     });
@@ -48,8 +54,10 @@ describe('Password value object', () => {
     `, () => {
         // GIVEN
         const password = '12345678'
+
         // WHEN
         const passwordVo = () => new Password(password);
+
         // THEN
         expect(passwordVo).toThrow('Password must have at least one letter')
     });
@@ -61,8 +69,10 @@ describe('Password value object', () => {
     `, () => {
         // GIVEN
         const password = '12ho'
+
         // WHEN
         const passwordVo = () => new Password(password);
+
         // THEN
         expect(passwordVo).toThrow('Password must have at least 8 characters')
     });
@@ -75,9 +85,11 @@ describe('Password value object', () => {
         // GIVEN
         const password = 'password1'
         const password2 = 'password1'
+
         // WHEN
         const passwordVo = new Password(password);
         const passwordVo2 = new Password(password2);
+
         // THEN
         expect(passwordVo.matches(passwordVo2)).toBe(true)
     });
@@ -90,9 +102,11 @@ describe('Password value object', () => {
         // GIVEN
         const password = 'password1'
         const password2 = 'password2'
+
         // WHEN
         const passwordVo = new Password(password);
         const passwordVo2 = new Password(password2);
+        
         // THEN
         expect(passwordVo.matches(passwordVo2)).toBe(false)
     });

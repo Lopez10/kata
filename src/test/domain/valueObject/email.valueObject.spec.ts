@@ -8,8 +8,10 @@ describe('Email value object', () => {
     `, () => {
         //GIVEN
         const email = 'prueba@test.com';
+
         //WHEN
         const emailVo = new Email(email);
+
         //THEN
         expect(emailVo).toBeDefined();
         expect(emailVo.props.value).toBe(email);
@@ -22,8 +24,10 @@ describe('Email value object', () => {
     `, () => {
         // GIVEN
         const email = ''
+
         // WHEN
         const emailVo = () => new Email(email);
+
         // THEN
         expect(emailVo).toThrow('Email is required')
     });
@@ -35,8 +39,10 @@ describe('Email value object', () => {
     `, () => {
         // GIVEN
         const email = 'prueba.com'
+
         // WHEN
         const emailVo = () => new Email(email);
+
         // THEN
         expect(emailVo).toThrow('Email is invalid')
     });
@@ -49,9 +55,11 @@ describe('Email value object', () => {
         // GIVEN
         const email = 'test@test.com'
         const email2 = 'test@test.com'
+
         // WHEN
         const emailVo = new Email(email);
         const emailVo2 = new Email(email2);
+
         // THEN
         expect(emailVo.matches(emailVo2)).toBe(true)
     });
@@ -64,9 +72,11 @@ describe('Email value object', () => {
         // GIVEN
         const email = 'test@test.com'
         const email2 = 'test@fake.com'
+
         // WHEN
         const emailVo = new Email(email);
         const emailVo2 = new Email(email2);
+        
         // THEN
         expect(emailVo.matches(emailVo2)).toBe(false)
     });
