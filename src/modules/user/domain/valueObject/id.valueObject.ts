@@ -1,10 +1,14 @@
-import { v4 } from "uuid";
 import { ValueObject } from "../../../../common/domain/valueObject/valueObject.base";
 
 export class Id extends ValueObject<string> {
-    constructor(value?: string) {
-        super(value ? {value} : {value: v4()});
+    constructor(value?: string, idGenerator: () => string = Id.generateRandom) {
+        const idValue = value ? value : idGenerator();
+        super({value: idValue});
         this.validate({value: this.props.value});
+    }
+
+    static generateRandom(): string {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
     protected validate(props: { value: string }): void {
