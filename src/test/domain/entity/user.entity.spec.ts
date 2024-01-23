@@ -1,4 +1,5 @@
 import { User } from "../../../modules/user/domain/entity/user.entity";
+import { DomainEmail } from "../../../modules/user/domain/valueObject/domainEmail.valueObject";
 import { Email } from "../../../modules/user/domain/valueObject/email.valueObject";
 import { Id } from "../../../modules/user/domain/valueObject/id.valueObject";
 import { Password } from "../../../modules/user/domain/valueObject/password.valueObject";
@@ -12,7 +13,10 @@ describe('User entity', () => {
         // GIVEN 
         const userData = {
             id: new Id(),
-            email: new Email('valid-email@test.com'),
+            email: new Email({
+                userEmail: 'valid-email',
+                domain: new DomainEmail('valid-domain.com')
+            }),
             password: new Password('valid-password1')
         };
         
@@ -35,7 +39,10 @@ describe('User entity', () => {
     `, () => {
         // GIVEN 
         const userData = {
-            email: new Email('test@test.com'),
+            email: new Email({
+                userEmail: 'valid-email',
+                domain: new DomainEmail('valid-domain.com')
+            }),
             password: new Password('valid-password1')
         };
         const user = User.create(userData);
@@ -54,12 +61,18 @@ describe('User entity', () => {
     `, () => {
         // GIVEN 
         const userData = {
-            email: new Email('test@test.com'),
+            email: new Email({
+                userEmail: 'valid-email',
+                domain: new DomainEmail('valid-domain.com')
+            }),
             password: new Password('valid-password1')
         };
 
         const userDataCopy = {
-            email: new Email('test@test.com'),
+            email: new Email({
+                userEmail: 'valid-email',
+                domain: new DomainEmail('valid-domain.com')
+            }),
             password: new Password('valid-password1')
         };
 

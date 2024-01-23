@@ -1,5 +1,6 @@
 import { RetrieveUsers } from "../../modules/user/application/useCase/retrieveUsers.useCase";
 import { User } from "../../modules/user/domain/entity/user.entity";
+import { DomainEmail } from "../../modules/user/domain/valueObject/domainEmail.valueObject";
 import { Email } from "../../modules/user/domain/valueObject/email.valueObject";
 import { Password } from "../../modules/user/domain/valueObject/password.valueObject";
 import { MockUserRepository } from "../domain/infrastructure/mock.user.repository";
@@ -15,11 +16,17 @@ describe('RetrieveUsers use case', () => {
 
         // GIVEN
         const userData = {
-            email: new Email('user1@test.com'),
+            email: new Email({
+                userEmail: 'user1',
+                domain: new DomainEmail('test.com')
+            }),
             password: new Password('12345678Test')
         }
         const userData2 = {
-            email: new Email('user2@test.com'),
+            email: new Email({
+                userEmail: 'user2',
+                domain: new DomainEmail('test.com')
+            }),
             password: new Password('12345678Test')
         }
 

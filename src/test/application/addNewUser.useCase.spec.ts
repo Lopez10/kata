@@ -1,5 +1,6 @@
 import { AddNewUser } from "../../modules/user/application/useCase/addNewUser.useCase";
 import { User } from "../../modules/user/domain/entity/user.entity";
+import { DomainEmail } from "../../modules/user/domain/valueObject/domainEmail.valueObject";
 import { Email } from "../../modules/user/domain/valueObject/email.valueObject";
 import { Password } from "../../modules/user/domain/valueObject/password.valueObject";
 import { MockUserRepository } from "../domain/infrastructure/mock.user.repository";
@@ -14,7 +15,10 @@ describe('AddNewUser use case', () => {
         const addNewUserUseCase = new AddNewUser(mockUserRepository);
         // GIVEN
         const userData = {
-            email: new Email('john@test.com'),
+            email: new Email({
+                userEmail: 'john',
+                domain: new DomainEmail('test.com')
+            }),
             password: new Password('12345678Test')
         }
 
@@ -39,14 +43,20 @@ describe('AddNewUser use case', () => {
 
         mockUserRepository.addNewUser(
             User.create({
-                email: new Email('test@test.com'),
+                email: new Email({
+                    userEmail: 'john',
+                    domain: new DomainEmail('test.com')
+                }),
                 password: new Password('123451111Test')
             })
         );
 
         // GIVEN
         const userData = {
-            email: new Email('test@test.com'),
+            email: new Email({
+                userEmail: 'john',
+                domain: new DomainEmail('test.com')
+            }),
             password: new Password('12345678Test')
         }
 

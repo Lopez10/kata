@@ -1,24 +1,28 @@
-import { DomainPrimitive, ValueObject } from "../../../../common/domain/valueObject/valueObject.base";
+import { ValueObject } from "../../../../common/domain/valueObject/valueObject.base";
+import { DomainEmail } from "./domainEmail.valueObject";
 
-export class Email extends ValueObject<string> {
+interface EmailProps {
+    userEmail: string;
+    domain: DomainEmail;
+}
 
-    constructor(value: string) {
-        super({value});  
-        this.validate({value});
-        this.props.value = value;
+export class Email extends ValueObject<EmailProps> {
+
+    constructor(value: EmailProps) {
+        super(value);
+        this.validate(value);
     }
 
-    private validateEmail(props: DomainPrimitive<string>): void {
-        const emailRegex = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
-        if (!emailRegex.test(props.value)) {
-            throw new Error("Email is invalid");
-        }
+    get email(): string {
+        return this.props.userEmail+'@'+this.props.domain.props.value;
     }
 
-    protected validate(props: DomainPrimitive<string>): void {
-        if (!props.value) {
-            throw new Error("Email is required");
+    protected validate(props: EmailProps): void {
+        if (!props.userEmail) {
+            throw new Error("User email is required");
         }
-        this.validateEmail(props)
+        if (!props.domain) {
+            throw new Error("Domain email is required");
+        }
     }
 }
