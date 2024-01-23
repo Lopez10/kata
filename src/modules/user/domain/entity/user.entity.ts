@@ -34,8 +34,13 @@ export class User {
     }
 
     public static create(props: UserProps, id?: Id): User {
-        const user = new User(props, id);
-        return user;
+        try {
+            const user = new User(props, id);
+            return user;
+        } catch (error) {
+            throw new Error('User creation failed')
+        }
+        
     }
 
     public equals(user: User): boolean {
