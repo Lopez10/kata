@@ -2,7 +2,7 @@ import { User } from "../entity/user.entity";
 import { Email } from "../valueObject/email.valueObject";
 
 export interface UserRepositoryPort {
-    getUsers(): Promise<User[]>;
+    retrieveUsers(): Promise<User[]>;
     addNewUser(user: User): Promise<void>;
-    getUserByEmail(email: Email): Promise<User | null>;
+    retrieveUserByEmail(email: Email): Promise<User | null>;
 }

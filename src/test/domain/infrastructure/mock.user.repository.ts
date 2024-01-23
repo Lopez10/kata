@@ -3,11 +3,9 @@ import { UserRepositoryPort } from "../../../modules/user/domain/port/user.repos
 import { Email } from "../../../modules/user/domain/valueObject/email.valueObject";
 
 export class MockUserRepository implements UserRepositoryPort {
-   
-    // Todo: Modify to Dto
     private users: User[] = [];
 
-    async getUsers(): Promise<User[]> {
+    async retrieveUsers(): Promise<User[]> {
         return this.users;
     }
     
@@ -15,7 +13,7 @@ export class MockUserRepository implements UserRepositoryPort {
         this.users.push(user);
     }
 
-    async getUserByEmail(email: Email): Promise<User | null> {
+    async retrieveUserByEmail(email: Email): Promise<User | null> {
         const user = this.users.find(user => user.email.matches(email)) || null;
         return user;
     }

@@ -7,7 +7,7 @@ export class AddNewUser {
     ) {}
 
     async run(user: User): Promise<void> {
-        const userFound = await this.userRepository.getUserByEmail(user.email);
+        const userFound = await this.userRepository.retrieveUserByEmail(user.email);
 
         if (userFound) {
             throw new Error('User already exists');
