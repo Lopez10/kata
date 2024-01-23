@@ -8,17 +8,18 @@ describe('Email value object', () => {
         THEN it should be created with correct value
     `, () => {
         //GIVEN
-        const email = 'prueba@test.com';
+        const userEmail = 'prueba';
+        const domainEmail = 'test.com';
 
         //WHEN
         const emailVo = new Email({
-            userEmail: 'prueba',
-            domain: new DomainEmail('test.com')
+            userEmail,
+            domain: new DomainEmail(domainEmail)
         });
 
         //THEN
         expect(emailVo).toBeDefined();
-        expect(emailVo.email).toBe(email);
+        expect(emailVo.email).toBe('prueba@test.com');
     });
 
     it(`
@@ -27,31 +28,35 @@ describe('Email value object', () => {
         THEN it should throw an empty error
     `, () => {
         // GIVEN
+        const userEmail = '';
+        const domainEmail = 'test.com';
         // WHEN
         const emailVo = () => new Email({
-            userEmail: '',
-            domain: new DomainEmail('test.com')
+            userEmail,
+            domain: new DomainEmail(domainEmail)
         });
 
         // THEN
         expect(emailVo).toThrow('User email is required')
     });
 
-    // it(`
-    //     GIVEN an invalid email
-    //     WHEN email is being created
-    //     THEN it should throw an invalid email error
-    // `, () => {
-    //     // GIVEN
-    //     // WHEN
-    //     const emailVo = () => new Email({
-    //         userEmail: '',
-    //         domain: new DomainEmail('test.com')
-    //     });
+    it(`
+        GIVEN an invalid email
+        WHEN email is being created
+        THEN it should throw an invalid email error
+    `, () => {
+        // GIVEN
+        const userEmail = '';
+        const domain = 'test.com';
+        // WHEN
+        const emailVo = () => new Email({
+            userEmail,
+            domain: new DomainEmail(domain)
+        });
 
-    //     // THEN
-    //     expect(emailVo).toThrow('User email is required')
-    // });
+        // THEN
+        expect(emailVo).toThrow('User email is required')
+    });
 
     it(`
         GIVEN two emails with same value
