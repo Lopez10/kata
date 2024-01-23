@@ -11,7 +11,7 @@ describe('User entity', () => {
     `, () => {
         // GIVEN 
         const userData = {
-            id: new Id('valid-id'),
+            id: new Id(),
             email: new Email('valid-email@test.com'),
             password: new Password('valid-password1')
         };

@@ -1,7 +1,13 @@
 import { ValueObject } from "../../../../common/domain/valueObject/valueObject.base";
 
 export class Id extends ValueObject<string> {
-    constructor(value?: string, idGenerator: () => string = Id.generateRandom) {
+    constructor({
+        value,
+        idGenerator = Id.generateRandom
+    }:{
+        value?: string, 
+        idGenerator?: () => string 
+    } = {}) {
         const idValue = value ? value : idGenerator();
         super({value: idValue});
         this.validate({value: this.props.value});

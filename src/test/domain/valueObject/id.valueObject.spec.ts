@@ -10,7 +10,7 @@ describe('Id value object', () => {
         const id = 'valid-id';
 
         // WHEN
-        const idVo = new Id(id);
+        const idVo = new Id({value: id});
 
         // THEN
         expect(idVo).toBeDefined();
@@ -26,7 +26,7 @@ describe('Id value object', () => {
         const id = '';
 
         // WHEN
-        const idVo = new Id(id);
+        const idVo = new Id({value: id});
         
         // THEN
         expect(idVo).toBeDefined();
