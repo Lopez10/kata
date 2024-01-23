@@ -30,7 +30,6 @@ export class User {
             ...this.props,
           };
           return Object.freeze(propsCopy);
-      
     }
 
     public static create(props: UserProps, id?: Id): User {
@@ -40,7 +39,6 @@ export class User {
         } catch (error) {
             throw new Error('User creation failed')
         }
-        
     }
 
     public equals(user: User): boolean {

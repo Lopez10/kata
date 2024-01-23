@@ -32,5 +32,4 @@ describe('Id value object', () => {
         expect(idVo).toBeDefined();
         expect(idVo.props.value).not.toEqual(id);
     });
-    
 });
