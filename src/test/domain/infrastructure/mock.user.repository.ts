@@ -5,15 +5,15 @@ import { Email } from "../../../modules/user/domain/valueObject/email.valueObjec
 export class MockUserRepository implements UserRepositoryPort {
     private users: User[] = [];
 
-    async retrieveUsers(): Promise<User[]> {
+    retrieveUsers(): User[] {
         return this.users;
     }
     
-    async addNewUser(user: User): Promise<void> {
+    addNewUser(user: User): void {
         this.users.push(user);
     }
 
-    async retrieveUserByEmail(email: Email): Promise<User | null> {
+    retrieveUserByEmail(email: Email): User | null {
         const user = this.users.find(user => user.email.matches(email)) || null;
         return user;
     }
