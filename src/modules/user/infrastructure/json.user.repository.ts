@@ -1,12 +1,12 @@
 import { Password } from './../domain/valueObject/password.valueObject';
 import { UserDto } from './../user.dto';
-import { readFileSync, writeFileSync } from "fs";
+import { PathOrFileDescriptor, readFileSync, writeFileSync } from "fs";
 import { User } from "../domain/entity/user.entity";
 import { UserRepositoryPort } from "../domain/port/user.repository.port";
 import { Email } from "../domain/valueObject/email.valueObject";
 
 export class JsonUserRepository implements UserRepositoryPort {
-    private filePath: string
+    private filePath: PathOrFileDescriptor
     constructor(filePath: string){
         this.filePath = filePath
     }
@@ -27,7 +27,8 @@ export class JsonUserRepository implements UserRepositoryPort {
             email: user.email.props.value,
             password: user.password.props.value
         })
-        writeFileSync(this.filePath, JSON.stringify(users))
+
+        writeFileSync(this.filePath, this.createFormattedUserJson(users))
     }
     retrieveUserByEmail(email: Email): User | null {
         const users = this.getUsers();
@@ -44,7 +45,13 @@ export class JsonUserRepository implements UserRepositoryPort {
 
     private getUsers() {
         const fileContent = readFileSync(this.filePath, 'utf-8');
-        const users = JSON.parse(fileContent);
-        return users;
+        const file = JSON.parse(fileContent);
+        return file.users;
+    }
+
+    private createFormattedUserJson(users: UserDto[]): string {
+        return `{
+            "users": ${JSON.stringify(users)}
+        }`
     }
 }

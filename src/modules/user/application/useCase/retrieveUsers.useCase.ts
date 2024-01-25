@@ -7,7 +7,7 @@ export class RetrieveUsers implements UseCase<void, User[]> {
         private readonly userRepository: UserRepositoryPort
     ) {}
 
-    run(): Promise<User[]> {
+    run(): User[] {
         return this.userRepository.retrieveUsers();
     }
 }
