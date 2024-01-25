@@ -1,4 +1,10 @@
+import { User } from "../domain/entity/user.entity"
+
 export interface UserViewPort {
-    printData(data: string): void
-    getInput(prompt: string): Promise<string>
+    printWelcomeMessage(): void
+    requestEmail(): Promise<string>
+    requestPassword(): Promise<string>
+    printUsers(users: User[]): void
+    printUsersCount(usersCount: number): void
+    printError(error: unknown): void
 }
